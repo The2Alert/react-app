@@ -1,7 +1,7 @@
 {
-  "name": "todo-list",
+  "name": "react-app",
   "version": "1.0.0",
-  "description": "Todo List app.",
+  "description": "React app.",
   "author": "dev2alert",
   "license": "MIT",
   "scripts": {
