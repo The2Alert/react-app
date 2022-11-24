@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:14
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm i
+      - name: Linter check
+        run: npm run lint
+      - name: Build app
+        run: npm run build
+      - name: Deploy
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: react-app-dev2alert.surge.sh
+          project: ./dist
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
