@@ -19,9 +19,9 @@ jobs:
         run: npm i
       - name: Linter check
         run: npm run lint
-      - name: Build app
+      - name: Build ⚙️
         run: npm run build
-      - name: Deploy
+      - name: Deploy 🚀
         uses: dswistowski/surge-sh-action@v1
         with:
           domain: react-app-dev2alert.surge.sh

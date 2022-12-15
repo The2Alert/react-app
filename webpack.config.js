@@ -1,23 +1,25 @@
 const {join} = require("path");
 const {ProgressPlugin} = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = function() {
+module.exports = function () {
     const mode = process.env.NODE_ENV;
     const devMode = mode === "development";
     const appPath = __dirname;
     const srcPath = join(appPath, "./src");
     const distPath = join(appPath, "./dist");
+    const assetsPath = join(appPath, "./assets");
 
     return {
         mode,
         devtool: devMode ? "source-map" : undefined,
         entry: join(srcPath, "./index.tsx"),
         output: {
-            path: join(distPath, "./assets"),
+            path: distPath,
             filename: "index.js",
             chunkFilename: "[chunkhash].chunk.js",
             assetModuleFilename: "[hash][ext][query]",
-            publicPath: "/assets/",
+            publicPath: "/",
             clean: true
         },
         module: {
@@ -50,10 +52,20 @@ module.exports = function() {
                             }
                         }
                     ]
+                },
+                {
+                    test: /\.hbs$/,
+                    loader: "handlebars-loader"
                 }
             ]
         },
-        plugins: [new ProgressPlugin],
+        plugins: [
+            new ProgressPlugin(),
+            new HtmlWebpackPlugin({
+                favicon: join(assetsPath, "./favicon.ico"),
+                template: join(srcPath, "./index.hbs")
+            })
+        ],
         resolve: {
             extensions: [".js", ".ts", ".tsx"]
         },
