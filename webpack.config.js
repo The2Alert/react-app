@@ -56,6 +56,10 @@ module.exports = function () {
                 {
                     test: /\.hbs$/,
                     loader: "handlebars-loader"
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: "asset/resource"
                 }
             ]
         },
