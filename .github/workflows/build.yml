@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - vite
 
 env:
   FORCE_COLOR: 1
@@ -24,7 +24,7 @@ jobs:
       - name: Deploy 🚀
         uses: dswistowski/surge-sh-action@v1
         with:
-          domain: react-app-dev2alert.surge.sh
+          domain: react-app-vite-dev2alert.surge.sh
           project: ./dist
           login: ${{ secrets.SURGE_LOGIN }}
           token: ${{ secrets.SURGE_TOKEN }}
